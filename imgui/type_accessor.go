@@ -19,6 +19,12 @@ func (io IO) AddMouseWheelDelta(horizontal, vertical float32) {
 	io.SetMouseWheelH(h)
 }
 
+func (io IO) KeyMap(imguiKey, nativeKey int) {
+	rawIO, rawIOFin := io.Handle()
+	defer rawIOFin()
+	C.ImGuiIO_KeyMap(rawIO, C.int(imguiKey), C.int(nativeKey))
+}
+
 // Commands returns the list of draw commands.
 // Typically 1 command = 1 GPU draw call, unless the command is a callback.
 func (d DrawData) CommandLists() []DrawList {
