@@ -108,3 +108,12 @@ func InputTextMultiline(label string, buf *string, size Vec2, flags InputTextFla
 		unsafe.Pointer(&stateHandle),
 	) == C.bool(true)
 }
+
+func (self ImGuiInputTextCallbackData) Buffer() []byte {
+	ptr := C.ImGuiInputTextCallbackData_GetBuf(self.handle())
+	if ptr == nil {
+		return nil
+	}
+	textLen := self.GetBufTextLen()
+	return ptrToByteSlice(unsafe.Pointer(ptr))[:textLen]
+}
