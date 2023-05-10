@@ -13092,10 +13092,8 @@ func (self IO) IniSavingRate() float32 {
 }
 
 func (self IO) SetIniFilename(v string) {
-	vArg, vFin := wrapString(v)
+	vArg, _ := wrapString(v)
 	C.wrap_ImGuiIO_SetIniFilename(self.handle(), vArg)
-
-	vFin()
 }
 
 func (self IO) IniFilename() string {
