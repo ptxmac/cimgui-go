@@ -1071,6 +1071,10 @@ type Payload struct {
 	data *C.ImGuiPayload
 }
 
+func (self Payload) IsNil() bool {
+	return self.data == nil
+}
+
 func (self *Payload) handle() (result *C.ImGuiPayload, fin func()) {
 	return self.data, func() {}
 }
