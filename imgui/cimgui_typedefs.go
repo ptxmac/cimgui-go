@@ -1511,6 +1511,10 @@ type Payload struct {
 	CData *C.ImGuiPayload
 }
 
+func (self Payload) IsNil() bool {
+	return self.CData == nil
+}
+
 // Handle returns C version of Payload and its finalizer func.
 func (self *Payload) Handle() (result *C.ImGuiPayload, fin func()) {
 	return self.CData, func() {}
